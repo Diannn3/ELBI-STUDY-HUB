@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-rm -rf /tmp/elbi-domain-test
-mkdir -p /tmp/elbi-domain-test
+rm -rf ./.tmp-domain
+mkdir -p ./.tmp-domain
 cd "$ROOT"
-tsc --target ES2022 --module commonjs --moduleResolution node --skipLibCheck --outDir /tmp/elbi-domain-test \
+npx tsc --target ES2022 --module commonjs --moduleResolution node --skipLibCheck --outDir ./.tmp-domain \
   src/features/focus/domain/timerTypes.ts \
   src/features/focus/domain/deriveTimer.ts \
   src/features/focus/domain/timerMachine.ts \
@@ -12,4 +12,7 @@ tsc --target ES2022 --module commonjs --moduleResolution node --skipLibCheck --o
   src/features/history/stats.ts \
   src/sync/conflicts.ts \
   src/sync/serialize.ts
+
+echo '{"type":"commonjs"}' > ./.tmp-domain/package.json
+
 node scripts/validate/test_domain.cjs

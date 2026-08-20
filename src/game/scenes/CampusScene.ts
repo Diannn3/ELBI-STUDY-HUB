@@ -35,11 +35,10 @@ export class CampusScene extends Phaser.Scene {
 
   update(time: number) {
     if (this.reducedMotion) return;
-    this.fireflies?.children.iterate((child) => {
+    this.fireflies?.getChildren().forEach((child: any) => {
       const dot = child as Phaser.GameObjects.Rectangle;
       const phase = dot.getData('phase') as number;
       dot.alpha = 0.22 + (Math.sin(time / 900 + phase) + 1) * 0.24;
-      return true;
     });
   }
 }
