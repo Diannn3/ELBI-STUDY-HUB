@@ -30,12 +30,12 @@ with sync_playwright() as p:
     check('focus view entered', bool(before), before)
     pth=OUT/'focus.png'; page.screenshot(path=str(pth)); report['screenshots'].append(str(pth))
 
-    page.wait_for_timeout(900); page.reload(wait_until='networkidle'); page.wait_for_selector('[data-view=focus]')
+    page.wait_for_timeout(1300); page.reload(wait_until='networkidle'); page.wait_for_selector('[data-view=focus]')
     after=page.locator('#timerDigits').inner_text()
     check('timer survives reload', before!=after or after in ('00:04','00:03'), f'{before}->{after}')
 
     # Background/visibility resilience: wait without interacting, then ensure derived clock moved.
-    clock_a=page.locator('#timerDigits').inner_text(); page.wait_for_timeout(900); clock_b=page.locator('#timerDigits').inner_text()
+    clock_a=page.locator('#timerDigits').inner_text(); page.wait_for_timeout(1300); clock_b=page.locator('#timerDigits').inner_text()
     check('timer derives from wall clock', clock_a!=clock_b, f'{clock_a}->{clock_b}')
 
     page.wait_for_selector('[data-view=wrap]', timeout=9000)

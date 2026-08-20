@@ -1,7 +1,14 @@
 {
   "compressionlevel": -1,
-  "height": 12,
+  "height": 23,
+  "width": 40,
   "infinite": false,
+  "tilewidth": 16,
+  "tileheight": 16,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "nextlayerid": 22,
+  "nextobjectid": 208,
   "layers": [
     {
       "id": 1,
@@ -11,119 +18,223 @@
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/01_sky.png"
+      "image": "../libresprite/campus_day/01_sky.png"
     },
     {
       "id": 2,
+      "name": "CLOUDS",
+      "type": "imagelayer",
+      "visible": true,
+      "opacity": 1,
+      "offsetx": 0,
+      "offsety": 0,
+      "image": "../libresprite/campus_day/02_clouds.png"
+    },
+    {
+      "id": 3,
       "name": "FAR_WORLD",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/02_far_vegetation.png"
+      "image": "../libresprite/campus_day/03_far_trees.png"
     },
     {
-      "id": 3,
+      "id": 4,
       "name": "ARCHITECTURE",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/03_architecture.png"
+      "image": "../libresprite/campus_day/04_cas.png"
     },
     {
-      "id": 4,
+      "id": 5,
+      "name": "OBLATION",
+      "type": "imagelayer",
+      "visible": true,
+      "opacity": 1,
+      "offsetx": 0,
+      "offsety": 0,
+      "image": "../libresprite/campus_day/05_oblation.png"
+    },
+    {
+      "id": 6,
       "name": "GROUND",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/04_ground.png"
+      "image": "../libresprite/campus_day/06_ground.png"
     },
     {
-      "id": 5,
+      "id": 7,
       "name": "PROPS_BACK",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/05_mid_vegetation.png"
+      "image": "../libresprite/campus_day/07_mid_trees.png"
     },
     {
-      "id": 6,
+      "id": 8,
       "name": "PROPS_FRONT",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/06_props.png"
+      "image": "../libresprite/campus_day/08_props.png"
     },
     {
-      "id": 7,
+      "id": 9,
       "name": "FOREGROUND",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/07_foreground.png"
+      "image": "../libresprite/campus_day/09_foreground.png"
     },
     {
-      "id": 8,
+      "id": 10,
       "name": "LIGHTING",
       "type": "imagelayer",
       "visible": true,
       "opacity": 1,
       "offsetx": 0,
       "offsety": 0,
-      "image": "../libresprite/campus/08_lighting.png"
+      "image": "../libresprite/campus_day/10_lighting.png"
     },
     {
-      "draworder": "topdown",
-      "id": 9,
+      "id": 20,
       "name": "FX_MARKERS",
-      "objects": [
-        {"id":1,"name":"firefly-a","point":true,"type":"firefly","x":48,"y":95},
-        {"id":2,"name":"firefly-b","point":true,"type":"firefly","x":88,"y":112},
-        {"id":3,"name":"firefly-c","point":true,"type":"firefly","x":215,"y":99},
-        {"id":4,"name":"firefly-d","point":true,"type":"firefly","x":271,"y":115},
-        {"id":5,"name":"rain-area","type":"rain","x":0,"y":0,"width":320,"height":180}
-      ],
-      "opacity": 1,
       "type": "objectgroup",
       "visible": true,
-      "x": 0,
-      "y": 0
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 101,
+          "name": "cloud-west",
+          "type": "cloud",
+          "x": 125,
+          "y": 55,
+          "point": true
+        },
+        {
+          "id": 102,
+          "name": "cloud-east",
+          "type": "cloud",
+          "x": 490,
+          "y": 62,
+          "point": true
+        },
+        {
+          "id": 103,
+          "name": "bird-path",
+          "type": "bird",
+          "x": 418,
+          "y": 96,
+          "point": true
+        },
+        {
+          "id": 104,
+          "name": "leaf-west",
+          "type": "leaf",
+          "x": 78,
+          "y": 208,
+          "point": true
+        },
+        {
+          "id": 105,
+          "name": "leaf-east",
+          "type": "leaf",
+          "x": 560,
+          "y": 214,
+          "point": true
+        }
+      ],
+      "draworder": "topdown"
     },
     {
-      "draworder": "topdown",
-      "id": 10,
+      "id": 21,
       "name": "INTERACTION_MARKERS",
-      "objects": [
-        {"id":6,"name":"hero-safe-left","type":"ui-safe","x":12,"y":30,"width":118,"height":92},
-        {"id":7,"name":"task-panel-safe-right","type":"ui-safe","x":210,"y":28,"width":100,"height":116}
-      ],
-      "opacity": 1,
       "type": "objectgroup",
       "visible": true,
-      "x": 0,
-      "y": 0
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 201,
+          "name": "UI_SAFE_RIGHT",
+          "type": "ui-safe",
+          "x": 466,
+          "y": 58,
+          "width": 154,
+          "height": 224,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 202,
+          "name": "UI_SAFE_TOP",
+          "type": "ui-safe",
+          "x": 18,
+          "y": 12,
+          "width": 604,
+          "height": 48,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 203,
+          "name": "ANCHOR_OBLATION",
+          "type": "anchor",
+          "x": 320,
+          "y": 188,
+          "point": true
+        },
+        {
+          "id": 204,
+          "name": "PARALLAX_SKY",
+          "type": "parallax",
+          "x": 120,
+          "y": 36,
+          "point": true
+        },
+        {
+          "id": 205,
+          "name": "PARALLAX_FAR",
+          "type": "parallax",
+          "x": 180,
+          "y": 152,
+          "point": true
+        },
+        {
+          "id": 206,
+          "name": "PARALLAX_WORLD",
+          "type": "parallax",
+          "x": 320,
+          "y": 220,
+          "point": true
+        },
+        {
+          "id": 207,
+          "name": "PARALLAX_FOREGROUND",
+          "type": "parallax",
+          "x": 520,
+          "y": 330,
+          "point": true
+        }
+      ],
+      "draworder": "topdown"
     }
   ],
-  "nextlayerid": 11,
-  "nextobjectid": 8,
-  "orientation": "orthogonal",
-  "renderorder": "right-down",
-  "tiledversion": "1.12.2",
-  "tileheight": 16,
   "tilesets": [],
-  "tilewidth": 16,
   "type": "map",
   "version": "1.10",
-  "width": 20
+  "tiledversion": "1.12.0"
 }

@@ -1,4 +1,4 @@
-# Elbi Study Hub — Pass 1
+# Elbi Study Hub — Pass 1.5
 
 A narrow, local-first UPLB/Elbi-inspired study companion built around one reliable loop:
 
@@ -6,12 +6,16 @@ A narrow, local-first UPLB/Elbi-inspired study companion built around one reliab
 
 This repository deliberately does **not** include Discord, social rooms, XP, achievements, avatar systems, multiple scenes, AI, full Kanban, or native desktop/mobile wrappers.
 
+## Pass 1.5 visual direction
+
+The first functional slice has been visually rebuilt around a **bright daytime UPLB/CAS scene**: UP Maroon + Forest Green + Gold interface accents, cream/sand utility surfaces, a 640×360 layered pixel campus, a maroon campus-notice Today panel, a cream radio-style status dock, and intentionally subdued Focus/Wrap states. See `docs/visual-direction-v2.md`.
+
 ## What is implemented
 
 - React 19 + TypeScript + Vite app architecture
 - Phaser 4 world layer with a React↔Phaser event bridge
-- one original 320×180 UPLB-inspired pixel campus hero scene
-- real pixel source layers and a LibreSprite `Image.putPixel()` rebuild script
+- one original 640×360 vibrant UPLB-inspired CAS/Oblation campus hero scene
+- 10 real pixel source layers, custom 16×16 UI icons, reusable scene props, and a LibreSprite `Image.putPixel()` rebuild script
 - Tiled `.tmj` source with scene layers, FX markers, and UI-safe interaction markers
 - FastPack `.fpsheet` configuration (`phaser3`, trim, 1 px extrusion, aliases, rotation off)
 - lossless PNG optimization stage
@@ -90,12 +94,13 @@ npm run test:e2e
 
 Authoring source is under `assets/source/libresprite/`.
 
-- `campus/*.png`: transparent editable layers
-- `props/*.png`: reusable sprites
+- `campus_day/*.png`: 10 transparent editable 640×360 layers
+- `props/*.png`: reusable trees, palms, benches, lamps, students, bird/leaf ambience sprites
+- `ui/*.png`: original 16×16 pixel UI icons
 - `scripts/rebuild_campus_hero.js`: reconstructs the hero pixel-by-pixel inside LibreSprite
-- `../palettes/elbi-pass1.gpl`: locked 44-color Pass-1 palette
+- `../palettes/elbi-up-day.gpl`: Pass-1.5 UP/Elbi day palette
 
-The runtime hero currently uses only 37 colors.
+The Pass-1.5 runtime hero currently uses 43 colors. The combined environment/UI palette contains 52 authored colors, while the scene itself stays below the 48-color environment cap.
 
 ### Tiled
 
@@ -104,8 +109,10 @@ Open `assets/source/tiled/elbi-study.tiled-project`, then `scene_home.tmj`.
 The source has:
 
 - BACKGROUND
+- CLOUDS
 - FAR_WORLD
 - ARCHITECTURE
+- OBLATION
 - GROUND
 - PROPS_BACK
 - PROPS_FRONT
@@ -113,6 +120,8 @@ The source has:
 - LIGHTING
 - FX_MARKERS
 - INTERACTION_MARKERS
+
+Pass 1.5 adds `UI_SAFE_RIGHT`, `UI_SAFE_TOP`, `ANCHOR_OBLATION`, ambient FX markers, and parallax markers so the scene can be composed around the DOM UI instead of hiding the central landmark.
 
 No external Tiled tileset `source` references are used.
 
@@ -154,7 +163,7 @@ The managed Chromium available in the build sandbox has a system policy that blo
 - mobile/desktop screenshots were generated and visually reviewed;
 - a real localhost IndexedDB/service-worker Playwright spec is included for CI/local execution, but could not be executed in this sandbox policy environment.
 
-See `docs/PASS1_IMPLEMENTATION_REPORT.md` for the exact verification matrix.
+See `docs/PASS1_5_IMPLEMENTATION_REPORT.md` for the current visual/verification matrix (and `docs/PASS1_IMPLEMENTATION_REPORT.md` for the original Pass-1 record).
 
 ## Branding
 

@@ -1,5 +1,4 @@
-/// <reference types="vitest" />
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -13,8 +12,8 @@ export default defineConfig({
         name: 'Elbi Study Hub',
         short_name: 'Elbi Study',
         description: 'An unofficial, local-first study companion inspired by Elbi.',
-        theme_color: '#111827',
-        background_color: '#0b1020',
+        theme_color: '#7B1113',
+        background_color: '#FFF9F1',
         display: 'standalone',
         start_url: '/',
         icons: [
@@ -29,8 +28,5 @@ export default defineConfig({
       }
     })
   ],
-  server: { port: 5173, strictPort: true },
-  test: {
-    include: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/__tests__/**/*.ts']
-  }
+  server: { port: 5173, strictPort: true }
 });

@@ -5,9 +5,9 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
   return {
     type: Phaser.AUTO,
     parent,
-    width: 320,
-    height: 180,
-    backgroundColor: '#111827',
+    width: 640,
+    height: 360,
+    backgroundColor: '#55A3D9',
     pixelArt: true,
     antialias: false,
     roundPixels: true,

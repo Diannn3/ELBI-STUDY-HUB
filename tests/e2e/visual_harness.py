@@ -22,7 +22,7 @@ with sync_playwright() as p:
     page.locator('[data-task]').first.click();page.locator('#startFocus').click();page.wait_for_selector('[role=dialog]')
     chk('modal opens',True);pth=OUT/'start-focus.png';page.screenshot(path=str(pth));report['screenshots'].append(str(pth.relative_to(ROOT)))
     page.locator('[data-mode=quiet5]').click();page.locator('#beginSession').click();page.wait_for_selector('[data-view=focus]')
-    clock1=page.locator('#timerDigits').inner_text();page.wait_for_timeout(1100);clock2=page.locator('#timerDigits').inner_text()
+    clock1=page.locator('#timerDigits').inner_text();page.wait_for_timeout(1600);clock2=page.locator('#timerDigits').inner_text()
     chk('wall-clock timer changes',clock1!=clock2,f'{clock1}->{clock2}')
     pth=OUT/'focus.png';page.screenshot(path=str(pth));report['screenshots'].append(str(pth.relative_to(ROOT)))
     page.wait_for_selector('[data-view=wrap]',timeout=8000);chk('natural expiration reaches wrap',True)

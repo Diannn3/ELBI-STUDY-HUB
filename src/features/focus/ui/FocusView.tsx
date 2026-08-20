@@ -25,7 +25,7 @@ export function FocusView() {
   return <main className="focus-view">
     <div className="focus-topline"><span className="brand-mark">ELBI STUDY</span><span>FOCUS MODE</span></div>
     <PixelPanel className="focus-console">
-      <p className="eyebrow">{task ? 'CURRENT QUEST' : 'OPEN FOCUS'}</p>
+      <p className="eyebrow">{task ? 'CURRENT WORK' : 'OPEN FOCUS'}</p>
       <h1>{task?.title ?? 'Focus session'}</h1>
       <div className="timer-digits" aria-live="polite">{clock}</div>
       {!isStopwatch ? <div className="timer-track"><span style={{ width: `${progress}%` }} /></div> : null}

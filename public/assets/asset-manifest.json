@@ -1,6 +1,20 @@
 {
   "hero": "campus_hero.png",
+  "sceneLayers": {
+    "01_sky": "scene_01_sky.png",
+    "02_clouds": "scene_02_clouds.png",
+    "03_far_trees": "scene_03_far_trees.png",
+    "04_cas": "scene_04_cas.png",
+    "05_oblation": "scene_05_oblation.png",
+    "06_ground": "scene_06_ground.png",
+    "07_mid_trees": "scene_07_mid_trees.png",
+    "08_props": "scene_08_props.png",
+    "09_foreground": "scene_09_foreground.png",
+    "10_lighting": "scene_10_lighting.png"
+  },
   "atlasImage": "campus-atlas.png",
   "atlasData": "campus-atlas.json",
-  "tiledMap": "scene_home.json"
+  "tiledMap": "scene_home.json",
+  "sceneVersion": "pass1.5-up-day",
+  "uiIcons": "ui/"
 }

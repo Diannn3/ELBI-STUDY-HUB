@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Pass 1 narrow path', () => {
   test('task → focus survives reload → wrap → TIL → history', async ({ page }) => {
-    await expect(page.getByText('One thing.')).toBeVisible();
+    await expect(page.getByText('ELBI STUDY')).toBeVisible();
     await page.getByRole('option').first().click();
     await page.getByRole('button', { name: /start focus/i }).click();
     await expect(page.getByRole('dialog')).toBeVisible();

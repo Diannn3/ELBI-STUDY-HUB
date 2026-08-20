@@ -1,9 +1,9 @@
-# Manual QA checklist
+# Manual QA checklist — Pass 1.5
 
 Run this after `npm run dev` or against a Cloudflare preview.
 
 ## Core path
-- [ ] Home appears with selected crisp pixel scene and Today panel.
+- [ ] Home appears with the crisp 640×360 daytime CAS/Oblation scene and Campus Notice Today panel.
 - [ ] Create a task with keyboard only.
 - [ ] Select a task with keyboard only.
 - [ ] Open Start Focus and close with Escape.
@@ -34,13 +34,19 @@ Run this after `npm run dev` or against a Cloudflare preview.
 - [ ] Enter/Space activate controls.
 - [ ] Escape closes modal.
 - [ ] 200% browser zoom remains usable.
-- [ ] `prefers-reduced-motion` disables fireflies/procedural motion.
+- [ ] `prefers-reduced-motion` disables cloud drift, bird and leaf ambience.
 - [ ] Touch controls are usable at 390×844.
+- [ ] Result choices remain understandable without color alone.
 - [ ] Run the included axe Playwright test.
 
-## Visual
-- [ ] No blurred pixel art.
-- [ ] No non-integer canvas filtering.
+## Visual / identity
+- [ ] 1440×900 and 1920×1080 Home both keep the central monument readable.
+- [ ] The Today board remains entirely inside the right utility zone and never covers the monument.
+- [ ] Mobile scene occupies roughly the top 38–45%; Today + dock flow below it.
+- [ ] No blurred pixel art or filtered scene textures.
+- [ ] No arbitrary fractional sprite scaling in Phaser.
 - [ ] No emoji used as production navigation icons.
-- [ ] No glassmorphism/rounded-card drift.
-- [ ] UI negative space does not cover key architecture.
+- [ ] No glassmorphism, giant rounded SaaS cards, or random gradient drift.
+- [ ] Gold is used as an accent rather than low-contrast gold text on cream.
+- [ ] The home is visibly brighter/more saturated than Focus Mode.
+- [ ] The app logo/identity remains original; the monument is scene content, never the product logo.

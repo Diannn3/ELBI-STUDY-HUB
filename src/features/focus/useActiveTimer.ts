@@ -7,7 +7,7 @@ import type { TimerMode } from './domain/timerTypes';
 
 export function useActiveTimer() {
   const active = useLiveQuery(() => db.activeTimers.orderBy('updatedAt').last(), [], undefined);
-  const [now, setNow] = useState(() => Date.now());
+  const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
     const id = window.setInterval(() => setNow(Date.now()), 250);

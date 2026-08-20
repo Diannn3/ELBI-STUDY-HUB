@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from pathlib import Path
 from PIL import Image
-import subprocess, shutil, json, sys, os
+import subprocess, shutil, json, sys
 ROOT=Path(__file__).resolve().parents[2]
-EXPORTS=ROOT/'assets/exports/sprites'; GENERATED=ROOT/'assets/generated/atlases'; PUBLIC=ROOT/'public/assets'
+EXPORTS=ROOT/'assets/exports/sprites'; SCENE_EXPORTS=ROOT/'assets/exports/scene'; GENERATED=ROOT/'assets/generated/atlases'; PUBLIC=ROOT/'public/assets'
 GENERATED.mkdir(parents=True,exist_ok=True); PUBLIC.mkdir(parents=True,exist_ok=True)
 
 def run(cmd):
@@ -11,10 +11,9 @@ def run(cmd):
 
 def fallback_pack():
     print('FastPack binary unavailable: using deterministic development fallback atlas. Locked .fpsheet remains production config.')
-    files=sorted(EXPORTS.glob('*.png'))
-    entries=[]; seen={}
-    # trim each image and dedupe exact RGBA bytes
-    sprites=[]
+    # The large 640x360 scene layers are intentionally NOT atlas-packed.
+    files=sorted(p for p in EXPORTS.glob('*.png') if p.name!='campus_hero.png')
+    entries=[]; seen={}; sprites=[]
     for p in files:
         im=Image.open(p).convert('RGBA')
         bbox=im.getbbox() or (0,0,1,1)
@@ -23,19 +22,16 @@ def fallback_pack():
         if key in seen:
             entries.append(('alias',p.stem,seen[key],im.size,bbox,None)); continue
         seen[key]=p.stem; sprites.append((p,im,trimmed,bbox))
-    # shelf pack; 2 border + 2 shape padding + 1 extrusion
     maxw=512; x=y=3; rowh=0; placed={}
     for p,orig,im,bbox in sprites:
         w,h=im.size; slotw=w+4; sloth=h+4
         if x+slotw>maxw: x=3; y+=rowh; rowh=0
         placed[p.stem]=(x+1,y+1,w,h,orig.size,bbox,im)
         x+=slotw; rowh=max(rowh,sloth)
-    height=y+rowh+3
-    # round to next multiple of 2 only, do not smooth
+    height=max(8,y+rowh+3)
     atlas=Image.new('RGBA',(maxw,height),(0,0,0,0))
     for name,(px,py,w,h,orig_size,bbox,im) in placed.items():
         atlas.alpha_composite(im,(px,py))
-        # one-pixel edge extrusion
         if w and h:
             atlas.paste(im.crop((0,0,w,1)),(px,py-1)); atlas.paste(im.crop((0,h-1,w,h)),(px,py+h))
             atlas.paste(im.crop((0,0,1,h)),(px-1,py)); atlas.paste(im.crop((w-1,0,w,h)),(px+w,py))
@@ -47,13 +43,12 @@ def fallback_pack():
           'sourceSize':{'w':orig_size[0],'h':orig_size[1]},
           'spriteSourceSize':{'x':ox,'y':oy,'w':w,'h':h},
           'frame':{'x':px,'y':py,'w':w,'h':h}})
-    for kind,name,target,orig_size,bbox,_ in entries:
+    for _,name,target,_,_,_ in entries:
         base=next(f for f in frames if f['filename']==target).copy(); base['filename']=name; frames.append(base)
-    meta={'app':'FastPack-compatible fallback','version':'pass1','image':'campus-atlas.png','format':'RGBA8888','size':{'w':atlas.width,'h':atlas.height},'scale':1}
+    meta={'app':'FastPack-compatible fallback','version':'pass1.5','image':'campus-atlas.png','format':'RGBA8888','size':{'w':atlas.width,'h':atlas.height},'scale':1}
     data={'textures':[{'image':'campus-atlas.png','format':'RGBA8888','size':{'w':atlas.width,'h':atlas.height},'scale':1,'frames':frames}], 'meta':meta}
     (GENERATED/'campus-atlas.json').write_text(json.dumps(data,indent=2))
 
-# deterministic authoring outputs first
 run([sys.executable,'scripts/assets/generate_pixel_art.py'])
 run([sys.executable,'scripts/assets/generate_libresprite_script.py'])
 run([sys.executable,'scripts/assets/generate_ambience.py'])
@@ -68,22 +63,33 @@ else:
 oxipng=shutil.which('oxipng')
 if oxipng:
     run([oxipng,'-o','4','--strip','safe',str(GENERATED/'campus-atlas.png')])
+    for p in SCENE_EXPORTS.glob('*.png'): run([oxipng,'-o','3','--strip','safe',str(p)])
 else:
-    # Pillow fallback is lossless; real OxiPNG remains the locked release optimizer.
     p=GENERATED/'campus-atlas.png'; Image.open(p).save(p,optimize=True,compress_level=9)
+    for p in SCENE_EXPORTS.glob('*.png'): Image.open(p).save(p,optimize=True,compress_level=9)
     print('OxiPNG binary unavailable: used Pillow lossless PNG optimization fallback.')
 
-# Public runtime output
+# Runtime output -----------------------------------------------------------------
+for old in PUBLIC.glob('scene_*.png'): old.unlink()
+UI_PUBLIC=PUBLIC/'ui'; UI_PUBLIC.mkdir(parents=True,exist_ok=True)
+for old in UI_PUBLIC.glob('*.png'): old.unlink()
 for src,dst in [
     (EXPORTS/'campus_hero.png',PUBLIC/'campus_hero.png'),
     (GENERATED/'campus-atlas.png',PUBLIC/'campus-atlas.png'),
     (GENERATED/'campus-atlas.json',PUBLIC/'campus-atlas.json'),
     (ROOT/'assets/source/tiled/scene_home.tmj',PUBLIC/'scene_home.json'),
 ]: shutil.copy2(src,dst)
+for src in sorted(SCENE_EXPORTS.glob('*.png')):
+    shutil.copy2(src, PUBLIC/f'scene_{src.name}')
+for src in sorted((ROOT/'assets/source/libresprite/ui').glob('*.png')):
+    shutil.copy2(src, UI_PUBLIC/src.name)
 
-manifest={'hero':'campus_hero.png','atlasImage':'campus-atlas.png','atlasData':'campus-atlas.json','tiledMap':'scene_home.json'}
+scene_layers={p.stem: f'scene_{p.name}' for p in sorted(SCENE_EXPORTS.glob('[0-9][0-9]_*.png'))}
+manifest={'hero':'campus_hero.png','sceneLayers':scene_layers,'atlasImage':'campus-atlas.png','atlasData':'campus-atlas.json','tiledMap':'scene_home.json','sceneVersion':'pass1.5-up-day','uiIcons':'ui/'}
 (PUBLIC/'asset-manifest.json').write_text(json.dumps(manifest,indent=2))
 PREVIEW=ROOT/'preview/assets'; PREVIEW.mkdir(parents=True,exist_ok=True)
-for src in [PUBLIC/'campus_hero.png', PUBLIC/'campus-atlas.png', PUBLIC/'campus-atlas.json', PUBLIC/'scene_home.json', PUBLIC/'asset-manifest.json']:
+for src in [PUBLIC/'campus_hero.png', PUBLIC/'campus-atlas.png', PUBLIC/'campus-atlas.json', PUBLIC/'scene_home.json', PUBLIC/'asset-manifest.json'] + sorted(PUBLIC.glob('scene_*.png')):
     if src.exists(): shutil.copy2(src, PREVIEW/src.name)
+PREVIEW_UI=PREVIEW/'ui'; PREVIEW_UI.mkdir(parents=True,exist_ok=True)
+for src in sorted(UI_PUBLIC.glob('*.png')): shutil.copy2(src, PREVIEW_UI/src.name)
 print('Assets ready:',PUBLIC)

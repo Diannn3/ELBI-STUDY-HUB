@@ -1,9 +1,9 @@
 const assert = require('assert');
-const timer = require('../../.tmp-domain/features/focus/domain/timerMachine.js');
-const derive = require('../../.tmp-domain/features/focus/domain/deriveTimer.js');
-const stats = require('../../.tmp-domain/features/history/stats.js');
-const conflicts = require('../../.tmp-domain/sync/conflicts.js');
-const serialize = require('../../.tmp-domain/sync/serialize.js');
+const timer = require('/tmp/elbi-domain-test/features/focus/domain/timerMachine.js');
+const derive = require('/tmp/elbi-domain-test/features/focus/domain/deriveTimer.js');
+const stats = require('/tmp/elbi-domain-test/features/history/stats.js');
+const conflicts = require('/tmp/elbi-domain-test/sync/conflicts.js');
+const serialize = require('/tmp/elbi-domain-test/sync/serialize.js');
 let n=0; function test(name,fn){try{fn();console.log('PASS',name);n++}catch(e){console.error('FAIL',name,e);process.exitCode=1}}
 test('25:00 -> 24:59 from absolute time',()=>{const t=timer.createTimer({id:'x',mode:'pomodoro25',now:1000});assert.equal(derive.formatClock(derive.deriveTimer(t,2000).remainingMs),'24:59')});
 test('pause freezes elapsed',()=>{const t=timer.createTimer({id:'x',mode:'quiet5',now:0});const p=timer.pauseTimer(t,60000);assert.equal(derive.deriveTimer(p,180000).elapsedMs,60000)});

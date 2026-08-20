@@ -1,28 +1,28 @@
 {
-  "name": "elbi-study-hub-pass1",
+  "name": "elbi-study-hub",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.5",
   "type": "module",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
     "dev": "vite",
-    "build": "npx tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "npx tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",
-    "assets": "python scripts/assets/build_assets.py",
-    "assets:watch": "python scripts/assets/watch_assets.py",
-    "validate:assets": "python scripts/validate/validate_assets.py",
-    "preview:static": "python -m http.server 4174 -d preview",
+    "assets": "python3 scripts/assets/build_assets.py",
+    "assets:watch": "python3 scripts/assets/watch_assets.py",
+    "validate:assets": "python3 scripts/validate/validate_assets.py",
+    "preview:static": "python3 -m http.server 4174 -d preview",
     "lint": "eslint \"src/**/*.{ts,tsx}\" vite.config.ts playwright.config.ts",
     "test:domain": "bash scripts/validate/run_domain_tests.sh",
-    "test:visual": "python tests/e2e/visual_harness.py",
-    "test:mobile": "python tests/e2e/mobile_visual.py",
+    "test:visual": "python3 tests/e2e/visual_harness.py",
+    "test:mobile": "python3 tests/e2e/mobile_visual.py",
     "qa:local": "npm run validate:assets && npm run test:domain && npm run test:visual && npm run test:mobile"
   },
   "dependencies": {

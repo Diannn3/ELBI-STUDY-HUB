@@ -33,15 +33,31 @@ export default function App() {
   return <main className="app-shell">
     <div className="scene-layer"><PhaserGame reducedMotion={prefs?.reducedMotion ?? false} /></div>
     <div className="scene-vignette" aria-hidden="true" />
+
     <header className="topbar">
-      <div className="brand"><span className="brand-pip" aria-hidden="true" /><div><strong>ELBI STUDY</strong><small>quiet work, campus rhythm</small></div></div>
-      <div className="topbar-actions"><span className={`network-chip ${online ? 'is-online' : 'is-offline'}`}>{online ? 'ONLINE' : 'OFFLINE'}</span><SettingsPopover /></div>
+      <div className="brand-plate">
+        <span className="brand-pip" aria-hidden="true" />
+        <div className="brand-copy"><strong>ELBI STUDY</strong><small>quiet work, campus rhythm</small></div>
+      </div>
+      <div className="topbar-actions">
+        <span className={`network-chip ${online ? 'is-online' : 'is-offline'}`}><i aria-hidden="true" />{online ? 'ONLINE' : 'OFFLINE'}</span>
+        <SettingsPopover />
+      </div>
     </header>
 
-    <section className="hero-copy" aria-labelledby="home-heading"><p>UPLB-INSPIRED FOCUS DESK</p><h1 id="home-heading">One thing.<br/>Then the next.</h1><span>Pick today's work and disappear into it for a while.</span></section>
+    <div className="scene-label" aria-hidden="true"><span>CAS FRONT</span><small>DAY CAMPUS</small></div>
 
     <aside className="home-panel-wrap"><TodayPanel /></aside>
-    <footer className="status-dock"><div className="ambient-label"><span className="audio-wave" aria-hidden="true">▂▅▃▆▂</span><div><small>AMBIENT</small><strong>{prefs?.ambience === 'rain' ? 'Rainy Elbi' : prefs?.ambience === 'night' ? 'Night insects' : prefs?.ambience === 'library' ? 'Quiet room' : 'Off'}</strong></div><AmbientAudioButton ambience={prefs?.ambience ?? 'rain'} volume={prefs?.ambienceVolume ?? .45} /></div><HistoryStrip /></footer>
+
+    <footer className="status-dock">
+      <div className="ambient-label">
+        <img src="/assets/ui/music.png" alt="" aria-hidden="true" />
+        <div><small>AMBIENT</small><strong>{prefs?.ambience === 'rain' ? 'Rainy Elbi' : prefs?.ambience === 'night' ? 'Night insects' : prefs?.ambience === 'library' ? 'Quiet room' : 'Off'}</strong></div>
+        <AmbientAudioButton ambience={prefs?.ambience ?? 'rain'} volume={prefs?.ambienceVolume ?? .45} />
+      </div>
+      <HistoryStrip />
+    </footer>
+
     <StartFocusModal />
   </main>;
 }

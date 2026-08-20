@@ -1,8 +1,10 @@
 {
   "automappingRulesFile": "",
   "commands": [],
-  "extensionsPath": "extensions",
-  "folders": ["."],
-  "propertyTypes": [],
-  "type": "project"
+  "extensionsPath": "",
+  "folders": [
+    "."
+  ],
+  "objectTypesFile": "",
+  "propertyTypes": []
 }
