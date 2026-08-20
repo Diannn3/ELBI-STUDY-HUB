@@ -1,0 +1,48 @@
+GIMP Palette
+Name: Elbi Pass 1
+Columns: 8
+#
+ 17  25  42	sky0
+ 25  36  58	sky1
+ 36  53  82	sky2
+104 118 138	cloud0
+135 148 161	cloud1
+ 24  45  45	mount0
+ 33  64  57	mount1
+ 43  81  66	mount2
+ 16  37  29	leaf0
+ 23  53  39	leaf1
+ 34  80  52	leaf2
+ 56 112  68	leaf3
+ 87 141  80	leaf4
+120 165  91	leaf5
+ 36  26  25	bark0
+ 59  40  33	bark1
+ 90  59  41	bark2
+ 58  26  32	brick0
+ 90  37  40	brick1
+117  49  47	brick2
+147  70  60	brick3
+127 116  94	cream0
+176 162 130	cream1
+214 197 159	cream2
+234 217 177	cream3
+ 27  29  39	roof0
+ 41  45  57	roof1
+ 66  70  85	roof2
+ 36  53  72	glass0
+ 54  80 107	glass1
+123 156 176	glass2
+ 26  40  31	ground0
+ 37  55  38	ground1
+ 49  73  50	ground2
+ 74  72  64	path0
+102  97  87	path1
+135 128 113	path2
+123  40  55	maroon
+217 171  84	gold
+255 217 122	lamp
+  8  11  17	shadow
+237 241 223	paper
+125 163 174	rain
+193  92  80	danger

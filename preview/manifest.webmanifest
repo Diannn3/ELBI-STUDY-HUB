@@ -1,0 +1,13 @@
+{
+  "name": "Elbi Study",
+  "short_name": "Elbi Study",
+  "description": "Offline-first UPLB-inspired focus desk",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090b12",
+  "theme_color": "#111827",
+  "icons": [
+    {"src":"assets/icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"assets/icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}
