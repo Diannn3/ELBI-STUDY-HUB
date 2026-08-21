@@ -1,6 +1,0 @@
-{
-  "hero": "campus_hero.png",
-  "atlasImage": "campus-atlas.png",
-  "atlasData": "campus-atlas.json",
-  "tiledMap": "scene_home.json"
-}
