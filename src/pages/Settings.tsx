@@ -64,6 +64,33 @@ export function Settings() {
 
         <Board>
           <div className="flex flex-col gap-3 p-4">
+            <BoardTitle size="sm">Appearance</BoardTitle>
+            <p className="text-[12px] text-muted">
+              The light cream HUD matches the reference. Dark is optional, and Auto follows your system.
+            </p>
+            <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="HUD appearance">
+              {(['light', 'dark', 'auto'] as const).map((theme) => (
+                <button
+                  key={theme}
+                  type="button"
+                  role="radio"
+                  aria-checked={settings.hudTheme === theme}
+                  onClick={() => updateSettings({ hudTheme: theme })}
+                  className={`min-h-[42px] border-2 px-3 font-pixel text-[10px] uppercase tracking-pixel transition-colors ${
+                    settings.hudTheme === theme
+                      ? 'border-maroon-deep bg-maroon text-cream'
+                      : 'border-sandDark bg-cream text-muted hover:border-maroon/50 hover:text-maroon'
+                  }`}
+                >
+                  {theme}
+                </button>
+              ))}
+            </div>
+          </div>
+        </Board>
+
+        <Board>
+          <div className="flex flex-col gap-3 p-4">
             <BoardTitle size="sm">Timer</BoardTitle>
             <div>
               <MicroLabel>Default preset</MicroLabel>

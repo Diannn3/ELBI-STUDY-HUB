@@ -5,14 +5,9 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState } from
-'react';
-import {
-  SEED_SESSIONS,
-  SEED_TASKS,
-  SEED_TILS,
-  TIMER_MODES } from
-'../data/seed';
+  useState
+} from 'react';
+import { SEED_SESSIONS, SEED_TASKS, SEED_TILS, TIMER_MODES } from '../data/seed';
 import type {
   FlowStage,
   Session,
@@ -21,13 +16,13 @@ import type {
   Task,
   TaskStatus,
   Til,
-  TimerModeId } from
-'../types/study';
+  TimerModeId
+} from '../types/study';
 
-/** Minutes already logged before this prototype session started. */
 const BASE_TODAY_MIN = 52;
 const BASE_WEEK_MIN = 222;
 const BASE_SESSIONS = 8;
+const STORAGE_KEY = 'elbi-study-reference-ui-v3';
 
 interface TimerState {
   modeId: TimerModeId;
@@ -35,6 +30,8 @@ interface TimerState {
   elapsedSec: number;
   running: boolean;
   taskId: string | null;
+  startedAtMs: number | null;
+  baseElapsedSec: number;
 }
 
 interface NewTaskInput {
@@ -44,6 +41,17 @@ interface NewTaskInput {
   priority?: Task['priority'];
   estimateMin?: number | null;
   status?: TaskStatus;
+}
+
+interface PersistedState {
+  tasks: Task[];
+  sessions: Session[];
+  tils: Til[];
+  settings: Settings;
+  selectedTaskId: string | null;
+  stage: FlowStage;
+  timer: TimerState;
+  liveMin: number;
 }
 
 interface StudyValue {
@@ -84,35 +92,68 @@ interface StudyValue {
   dismissToast: () => void;
 }
 
+const DEFAULT_SETTINGS: Settings = {
+  reducedMotion: false,
+  notifications: true,
+  ambienceOn: true,
+  volume: 45,
+  cloudSync: false,
+  highContrastText: false,
+  defaultMode: '25-5',
+  customMinutes: 35,
+  hudTheme: 'light'
+};
+
+const DEFAULT_TIMER: TimerState = {
+  modeId: '25-5',
+  totalSec: 25 * 60,
+  elapsedSec: 0,
+  running: false,
+  taskId: null,
+  startedAtMs: null,
+  baseElapsedSec: 0
+};
+
+function readPersisted(): Partial<PersistedState> | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Partial<PersistedState>) : null;
+  } catch {
+    return null;
+  }
+}
+
+function elapsedNow(timer: TimerState, now = Date.now()) {
+  if (!timer.running || timer.startedAtMs === null) return timer.elapsedSec;
+  const elapsed = timer.baseElapsedSec + Math.floor((now - timer.startedAtMs) / 1000);
+  return timer.totalSec === null ? Math.max(0, elapsed) : Math.min(timer.totalSec, Math.max(0, elapsed));
+}
+
 const StudyContext = createContext<StudyValue | null>(null);
 
-export function StudyProvider({ children }: {children: React.ReactNode;}) {
-  const [tasks, setTasks] = useState<Task[]>(SEED_TASKS);
-  const [sessions, setSessions] = useState<Session[]>(SEED_SESSIONS);
-  const [tils, setTils] = useState<Til[]>(SEED_TILS);
-  const [selectedTaskId, setSelectedTaskId] = useState<string | null>('t1');
-  const [stage, setStage] = useState<FlowStage>('campus');
+export function StudyProvider({ children }: { children: React.ReactNode }) {
+  const persistedRef = useRef(readPersisted());
+  const persisted = persistedRef.current;
+
+  const [tasks, setTasks] = useState<Task[]>(persisted?.tasks ?? SEED_TASKS);
+  const [sessions, setSessions] = useState<Session[]>(persisted?.sessions ?? SEED_SESSIONS);
+  const [tils, setTils] = useState<Til[]>(persisted?.tils ?? SEED_TILS);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(persisted?.selectedTaskId ?? 't1');
+  const [stage, setStage] = useState<FlowStage>(persisted?.stage ?? 'campus');
   const [outcome, setOutcome] = useState<SessionOutcome | null>(null);
   const [lastSessionMinutes, setLastSessionMinutes] = useState(25);
   const [toast, setToast] = useState<string | null>(null);
-  const [liveMin, setLiveMin] = useState(0);
+  const [liveMin, setLiveMin] = useState(persisted?.liveMin ?? 0);
   const [settings, setSettings] = useState<Settings>({
-    reducedMotion: false,
-    notifications: true,
-    ambienceOn: true,
-    volume: 45,
-    cloudSync: false,
-    highContrastText: false,
-    defaultMode: '25-5',
-    customMinutes: 35
+    ...DEFAULT_SETTINGS,
+    ...(persisted?.settings ?? {})
   });
-  const [timer, setTimer] = useState<TimerState>({
-    modeId: '25-5',
-    totalSec: 25 * 60,
-    elapsedSec: 0,
-    running: false,
-    taskId: null
-  });
+  const [timer, setTimer] = useState<TimerState>(() => ({
+    ...DEFAULT_TIMER,
+    ...(persisted?.timer ?? {}),
+    elapsedSec: persisted?.timer ? elapsedNow({ ...DEFAULT_TIMER, ...persisted.timer }) : 0
+  }));
 
   const toastTimer = useRef<number | null>(null);
 
@@ -122,34 +163,65 @@ export function StudyProvider({ children }: {children: React.ReactNode;}) {
     toastTimer.current = window.setTimeout(() => setToast(null), 4200);
   }, []);
 
-  // ---- timer tick ----
   useEffect(() => {
     if (!timer.running) return;
-    const id = window.setInterval(() => {
+    const update = () => {
       setTimer((prev) => {
         if (!prev.running) return prev;
-        const next = prev.elapsedSec + 1;
-        if (prev.totalSec !== null && next >= prev.totalSec) {
-          return { ...prev, elapsedSec: prev.totalSec, running: false };
-        }
-        return { ...prev, elapsedSec: next };
+        const next = elapsedNow(prev);
+        if (next === prev.elapsedSec && !(prev.totalSec !== null && next >= prev.totalSec)) return prev;
+        const finished = prev.totalSec !== null && next >= prev.totalSec;
+        return {
+          ...prev,
+          elapsedSec: next,
+          running: finished ? false : prev.running,
+          startedAtMs: finished ? null : prev.startedAtMs,
+          baseElapsedSec: finished ? next : prev.baseElapsedSec
+        };
       });
-    }, 1000);
-    return () => window.clearInterval(id);
+    };
+    update();
+    const id = window.setInterval(update, 250);
+    const onVisibility = () => update();
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('focus', onVisibility);
+    return () => {
+      window.clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('focus', onVisibility);
+    };
   }, [timer.running]);
 
-  // ---- natural completion ----
   useEffect(() => {
     if (
-    stage === 'focus' &&
-    !timer.running &&
-    timer.totalSec !== null &&
-    timer.elapsedSec >= timer.totalSec)
-    {
+      stage === 'focus' &&
+      !timer.running &&
+      timer.totalSec !== null &&
+      timer.elapsedSec >= timer.totalSec
+    ) {
       setLastSessionMinutes(Math.max(1, Math.round(timer.totalSec / 60)));
       setStage('wrap');
     }
   }, [stage, timer.running, timer.elapsedSec, timer.totalSec]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const payload: PersistedState = {
+      tasks,
+      sessions,
+      tils,
+      settings,
+      selectedTaskId,
+      stage,
+      timer,
+      liveMin
+    };
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch {
+      // Prototype persistence is best-effort; canonical app uses Dexie.
+    }
+  }, [tasks, sessions, tils, settings, selectedTaskId, stage, timer, liveMin]);
 
   const selectTask = useCallback((id: string) => setSelectedTaskId(id), []);
 
@@ -169,11 +241,11 @@ export function StudyProvider({ children }: {children: React.ReactNode;}) {
   }, []);
 
   const updateTask = useCallback((id: string, patch: Partial<Task>) => {
-    setTasks((prev) => prev.map((t) => t.id === id ? { ...t, ...patch } : t));
+    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...patch } : t)));
   }, []);
 
   const moveTask = useCallback((id: string, status: TaskStatus) => {
-    setTasks((prev) => prev.map((t) => t.id === id ? { ...t, status } : t));
+    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, status } : t)));
   }, []);
 
   const removeTask = useCallback((id: string) => {
@@ -187,15 +259,17 @@ export function StudyProvider({ children }: {children: React.ReactNode;}) {
     (modeId: TimerModeId, customMinutes?: number) => {
       const mode = TIMER_MODES.find((m) => m.id === modeId);
       let totalSec: number | null = null;
-      if (modeId === 'custom') totalSec = (customMinutes ?? 35) * 60;else
-      if (mode?.minutes) totalSec = mode.minutes * 60;
+      if (modeId === 'custom') totalSec = (customMinutes ?? 35) * 60;
+      else if (mode?.minutes) totalSec = mode.minutes * 60;
 
       setTimer({
         modeId,
         totalSec,
         elapsedSec: 0,
         running: true,
-        taskId: selectedTaskId
+        taskId: selectedTaskId,
+        startedAtMs: Date.now(),
+        baseElapsedSec: 0
       });
       if (selectedTaskId) updateTask(selectedTaskId, { status: 'progress' });
       setOutcome(null);
@@ -204,20 +278,42 @@ export function StudyProvider({ children }: {children: React.ReactNode;}) {
     [selectedTaskId, updateTask]
   );
 
-  const pause = useCallback(
-    () => setTimer((p) => ({ ...p, running: false })),
-    []
-  );
-  const resume = useCallback(
-    () => setTimer((p) => ({ ...p, running: true })),
-    []
-  );
+  const pause = useCallback(() => {
+    setTimer((prev) => {
+      const elapsed = elapsedNow(prev);
+      return {
+        ...prev,
+        elapsedSec: elapsed,
+        baseElapsedSec: elapsed,
+        startedAtMs: null,
+        running: false
+      };
+    });
+  }, []);
+
+  const resume = useCallback(() => {
+    setTimer((prev) => ({
+      ...prev,
+      baseElapsedSec: prev.elapsedSec,
+      startedAtMs: Date.now(),
+      running: true
+    }));
+  }, []);
 
   const endSession = useCallback(() => {
-    setTimer((p) => ({ ...p, running: false }));
-    setLastSessionMinutes(Math.max(1, Math.round(timer.elapsedSec / 60)));
+    setTimer((prev) => {
+      const elapsed = elapsedNow(prev);
+      setLastSessionMinutes(Math.max(1, Math.round(elapsed / 60)));
+      return {
+        ...prev,
+        elapsedSec: elapsed,
+        baseElapsedSec: elapsed,
+        startedAtMs: null,
+        running: false
+      };
+    });
     setStage('wrap');
-  }, [timer.elapsedSec]);
+  }, []);
 
   const recordSession = useCallback(
     (chosen: SessionOutcome, minutes: number) => {
@@ -299,8 +395,7 @@ export function StudyProvider({ children }: {children: React.ReactNode;}) {
   );
 
   const todayTasks = useMemo(
-    () =>
-    tasks.filter((t) => t.status === 'today' || t.status === 'progress'),
+    () => tasks.filter((t) => t.status === 'today' || t.status === 'progress'),
     [tasks]
   );
 

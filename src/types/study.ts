@@ -45,6 +45,8 @@ export interface TimerMode {
   breakMinutes: number | null;
 }
 
+export type HudTheme = 'light' | 'dark' | 'auto';
+
 export interface Settings {
   reducedMotion: boolean;
   notifications: boolean;
@@ -54,6 +56,7 @@ export interface Settings {
   highContrastText: boolean;
   defaultMode: TimerModeId;
   customMinutes: number;
+  hudTheme: HudTheme;
 }
 
 export type FlowStage = 'campus' | 'setup' | 'focus' | 'wrap' | 'til';

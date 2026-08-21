@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ELBI Study — reference rebuild preview</title>
+<link rel="stylesheet" href="../src/index.css" />
+<style>
+  .preview-icon{display:inline-grid;place-items:center;width:16px;height:16px;font-family:monospace;font-weight:900;font-size:13px;line-height:1;color:currentColor}
+  .preview-tree{width:56px;height:56px}
+</style>
+</head>
+<body>
+<div class="app-viewport hud-light" data-hud-theme="light">
+  <div class="app-frame">
+    <span class="frame-corner frame-corner--tl"></span><span class="frame-corner frame-corner--tr"></span><span class="frame-corner frame-corner--bl"></span><span class="frame-corner frame-corner--br"></span>
+    <span class="frame-pixels"><i></i><i></i><i></i></span>
+
+    <div class="app-main app-main--campus">
+      <div class="campus-home">
+        <div class="campus-scene campus-home__scene">
+          <img class="campus-scene__image pixelated" src="../public/campus-reference-pixel.png" />
+          <div class="campus-scene__sunwash"></div><div class="campus-scene__edge"></div>
+        </div>
+        <div class="campus-home__board-slot">
+          <aside class="today-board">
+            <div class="today-board__cap"><span></span><span></span></div>
+            <span class="today-board__ornament today-board__ornament--tl"></span><span class="today-board__ornament today-board__ornament--tr"></span><span class="today-board__ornament today-board__ornament--bl"></span><span class="today-board__ornament today-board__ornament--br"></span>
+            <div class="today-board__inner">
+              <div class="today-board__title-wrap"><h2 class="today-board__title">TODAY</h2><div class="today-board__rule"><i></i><b></b><i></i></div></div>
+              <div class="today-board__tasks">
+                <button class="today-task is-selected"><span class="today-task__check"><span></span></span><span class="today-task__copy"><strong>MATH 28</strong><span>Problem Set 3</span><small>Due tomorrow</small></span><span class="today-task__note">▤</span></button>
+                <button class="today-task"><span class="today-task__check"></span><span class="today-task__copy"><strong>CMSC 12</strong><span>Review arrays</span></span><span class="today-task__note">▤</span></button>
+                <button class="today-task"><span class="today-task__check"></span><span class="today-task__copy"><strong>STAT 101</strong><span>Exercises 4–8</span></span><span class="today-task__note">▤</span></button>
+              </div>
+              <form class="today-board__form"><div class="today-board__input-row"><input placeholder="What do you need to work on?"/><button class="today-board__edit"><span class="pixel-pencil"></span></button></div><button class="today-board__add">＋ Add task</button></form>
+              <button class="today-board__focus"><span>START FOCUS</span></button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-chrome app-chrome--top">
+      <header class="reference-topbar">
+        <div class="brand-lockup"><img src="../public/ui/tree-logo.png" class="brand-lockup__tree pixelated"/><div class="brand-lockup__copy"><p class="brand-lockup__title">ELBI STUDY</p><p class="brand-lockup__tagline">quiet work, campus rhythm</p></div></div>
+        <nav class="reference-nav"><a class="reference-nav__item is-active"><span class="preview-icon">⌂</span><span>Campus</span><i></i></a><a class="reference-nav__item"><span class="preview-icon">▦</span><span>Plan</span><i></i></a><a class="reference-nav__item"><span class="preview-icon">▥</span><span>Learn</span><i></i></a><a class="reference-nav__item"><span class="preview-icon">▥</span><span>Stats</span><i></i></a><a class="reference-nav__item"><span class="preview-icon">⚙</span><span>Settings</span><i></i></a></nav>
+      </header>
+    </div>
+
+    <div class="app-chrome app-chrome--dock">
+      <section class="reference-dock">
+        <span class="reference-dock__corner reference-dock__corner--tl"></span><span class="reference-dock__corner reference-dock__corner--tr"></span><span class="reference-dock__corner reference-dock__corner--bl"></span><span class="reference-dock__corner reference-dock__corner--br"></span>
+        <div class="reference-dock__ambience"><img src="../public/07d32c10-4bec-4295-be4c-6815235c9725.jpg" class="reference-dock__album pixelated"/><div class="reference-dock__ambience-copy"><strong>Rainy Elbi</strong><span>campus ambience</span><div class="reference-dock__audio-controls"><button>Ⅱ</button><span>◀</span><label><input type="range" class="dock-slider" value="45"/></label></div></div></div>
+        <span class="reference-dock__divider"></span>
+        <div class="reference-dock__metric"><span class="reference-dock__metric-icon">◷</span><span class="reference-dock__metric-copy"><small>TODAY</small><strong>52</strong><em>min</em></span></div>
+        <span class="reference-dock__divider"></span>
+        <div class="reference-dock__metric"><span class="reference-dock__metric-icon">▦</span><span class="reference-dock__metric-copy"><small>THIS WEEK</small><strong>3h 42m</strong></span></div>
+        <span class="reference-dock__divider"></span>
+        <div class="reference-dock__metric"><span class="reference-dock__metric-icon">♣</span><span class="reference-dock__metric-copy"><small>CONSISTENCY</small><strong class="is-accent">4 / 5</strong><em>days</em></span></div>
+        <span class="reference-dock__divider reference-dock__divider--current"></span>
+        <div class="reference-dock__current"><span class="reference-dock__current-icon">▤</span><div class="reference-dock__current-copy"><small>CURRENT</small><strong><b>MATH 28</b><span> — Problem Set 3</span></strong><div class="reference-dock__progress"><i style="width:48%"></i></div></div><time>25:00</time><button class="reference-dock__action">■</button></div>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>
