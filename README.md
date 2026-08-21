@@ -1,170 +1,64 @@
-# Elbi Study Hub — Pass 1.5
+# ELBI STUDY — Opus UI Audit + Fixed Frontend
 
-A narrow, local-first UPLB/Elbi-inspired study companion built around one reliable loop:
+This folder is the **fixed version of the Opus/Magic Patterns frontend prototype** supplied for ELBI STUDY HUB.
 
-**Campus Home → choose/create task → Start Focus → survive reload/background/offline → finish → Done/Continue/Blocked → TIL → history/stats update.**
+The redesign keeps the UPLB pixel-art identity, but changes the visual system to match the supplied Lofi Hub reference much more closely:
 
-This repository deliberately does **not** include Discord, social rooms, XP, achievements, avatar systems, multiple scenes, AI, full Kanban, or native desktop/mobile wrappers.
+- full-bleed pixel campus instead of a framed cream dashboard
+- compact floating brand and icon navigation
+- dark CRT / notice-board utility surfaces
+- a large right-side study board with Backlog / In Progress / Done columns
+- slim lofi-radio/status dock along the bottom
+- white pixel display text with restrained UP Maroon / UP Green / UP Gold accents
+- quieter focus mode and matching wrap-up / TIL surfaces
 
-## Pass 1.5 visual direction
+## Important architecture note
 
-The first functional slice has been visually rebuilt around a **bright daytime UPLB/CAS scene**: UP Maroon + Forest Green + Gold interface accents, cream/sand utility surfaces, a 640×360 layered pixel campus, a maroon campus-notice Today panel, a cream radio-style status dock, and intentionally subdued Focus/Wrap states. See `docs/visual-direction-v2.md`.
+This zip is still a **frontend prototype**, not the canonical production implementation from the ELBI STUDY HUB blueprint. It deliberately does **not** replace the production architecture decisions already made for the actual app:
 
-## What is implemented
+- Phaser world layer
+- Dexie / IndexedDB local-first data
+- Supabase canonical cloud data + RLS
+- FastPack / Tiled / LibreSprite asset pipeline
+- production timer domain model
 
-- React 19 + TypeScript + Vite app architecture
-- Phaser 4 world layer with a React↔Phaser event bridge
-- one original 640×360 vibrant UPLB-inspired CAS/Oblation campus hero scene
-- 10 real pixel source layers, custom 16×16 UI icons, reusable scene props, and a LibreSprite `Image.putPixel()` rebuild script
-- Tiled `.tmj` source with scene layers, FX markers, and UI-safe interaction markers
-- FastPack `.fpsheet` configuration (`phaser3`, trim, 1 px extrusion, aliases, rotation off)
-- lossless PNG optimization stage
-- Dexie/IndexedDB local database schema and reactive queries
-- absolute-timestamp focus timer with pause/resume/natural finish/early end
-- task creation/selection and 25/5, 50/10, Quiet 5, Custom, and Flow modes
-- Done / Continue / Blocked wrap-up paths
-- optional TIL note capture
-- derived daily/weekly history stats
-- local-first sync outbox plus Supabase serializer/replay layer
-- migration-controlled Supabase schema and RLS policies
-- PWA/service-worker configuration and persistent-storage request
-- original generated Rainy Elbi / Night Insects / Quiet Room ambience loops
-- reduced-motion behavior
-- Vitest/Playwright/axe test definitions
-- screenshot regression baseline path
-- GitHub Actions CI definition
-- Cloudflare Pages deployment instructions
-- dependency-free `preview/` verification harness
+I did, however, repair the two biggest behavioral regressions in the standalone prototype:
 
-## Quickest way to inspect it
+1. its focus timer now derives elapsed time from absolute timestamps instead of trusting one `setInterval` tick per second;
+2. prototype state is persisted to localStorage so reload/background testing is meaningful before this UI is ported onto Dexie.
 
-The sandbox could not reach the npm registry, so a no-dependency preview harness is included and was used for visual/interaction QA.
+When merging into the real repo, **port the visual components/styles, not this prototype context as the data layer**.
 
-### Windows
-
-Double-click `start-preview.bat`, then open:
-
-`http://127.0.0.1:4174/`
-
-### macOS/Linux/WSL
-
-```bash
-python3 -m http.server 4174 -d preview
-```
-
-Then open `http://127.0.0.1:4174/`.
-
-The preview uses IndexedDB when served normally and includes the service worker/offline shell.
-
-## Full development setup
-
-Requirements:
-
-- Node 22+
-- npm
-- Python 3.13+ with Pillow for the deterministic asset scripts
-- FFmpeg for rebuilding the original ambience `.ogg` files
-- LibreSprite for manual pixel editing
-- Tiled 1.12.x for `.tmj` editing
-- FastPack CLI for production atlas packing
-- OxiPNG for the explicit final lossless optimization stage
-- Supabase CLI + Docker only when testing cloud migrations/RLS locally
+## Run locally
 
 ```bash
 npm install
-npm run assets
 npm run dev
 ```
 
-### Quality commands
+Build:
 
 ```bash
-npm run validate:assets
-npm run test:domain
-npm run test
-npm run lint
-npm run typecheck
 npm run build
-npm run test:e2e
 ```
 
-## Asset workflow
+The `public/_redirects` file provides SPA history fallback on hosts that support that convention.
 
-### Pixel art
+## Main changed files
 
-Authoring source is under `assets/source/libresprite/`.
+- `src/App.tsx` — persistent full-screen scene + overlay shell
+- `src/components/CampusScene.tsx` — dusk treatment that keeps pixel art readable
+- `src/components/TopNav.tsx` — compact floating icon HUD
+- `src/components/TodayBoard.tsx` — reference-inspired three-column study board
+- `src/components/StudyDock.tsx` — lofi radio/status bar
+- `src/components/StartFocusModal.tsx`
+- `src/components/FocusMode.tsx`
+- `src/components/SessionWrapUp.tsx`
+- `src/components/ui/Board.tsx`
+- `src/components/ui/PixelButton.tsx`
+- `src/index.css`
+- `tailwind.config.js`
+- `src/contexts/StudyContext.tsx` — prototype timer/persistence hardening
+- `src/pages/*` — dark in-world surfaces instead of paper dashboard pages
 
-- `campus_day/*.png`: 10 transparent editable 640×360 layers
-- `props/*.png`: reusable trees, palms, benches, lamps, students, bird/leaf ambience sprites
-- `ui/*.png`: original 16×16 pixel UI icons
-- `scripts/rebuild_campus_hero.js`: reconstructs the hero pixel-by-pixel inside LibreSprite
-- `../palettes/elbi-up-day.gpl`: Pass-1.5 UP/Elbi day palette
-
-The Pass-1.5 runtime hero currently uses 43 colors. The combined environment/UI palette contains 52 authored colors, while the scene itself stays below the 48-color environment cap.
-
-### Tiled
-
-Open `assets/source/tiled/elbi-study.tiled-project`, then `scene_home.tmj`.
-
-The source has:
-
-- BACKGROUND
-- CLOUDS
-- FAR_WORLD
-- ARCHITECTURE
-- OBLATION
-- GROUND
-- PROPS_BACK
-- PROPS_FRONT
-- FOREGROUND
-- LIGHTING
-- FX_MARKERS
-- INTERACTION_MARKERS
-
-Pass 1.5 adds `UI_SAFE_RIGHT`, `UI_SAFE_TOP`, `ANCHOR_OBLATION`, ambient FX markers, and parallax markers so the scene can be composed around the DOM UI instead of hiding the central landmark.
-
-No external Tiled tileset `source` references are used.
-
-### FastPack
-
-`assets/source/atlas.fpsheet` is the committed packing contract.
-
-```bash
-fastpack pack --project assets/source/atlas.fpsheet
-```
-
-`npm run assets` automatically uses FastPack if the binary is available. In the sandbox, FastPack/OxiPNG executables were unavailable, so the script exercised a deterministic lossless development fallback while keeping the production FastPack/OxiPNG stage intact.
-
-## Local-first behavior
-
-The UI writes to Dexie first. Outbox replay only happens when:
-
-1. the device is online,
-2. Supabase is configured, and
-3. a Supabase user is authenticated.
-
-A local placeholder identity is replaced with the authenticated `auth.uid()` before cloud replay, so RLS ownership remains correct.
-
-## Supabase
-
-```bash
-supabase start
-supabase db reset
-```
-
-The Pass-1 migration enables RLS on every exposed table and creates per-operation ownership policies.
-
-## Testing note
-
-The managed Chromium available in the build sandbox has a system policy that blocks **all URL navigation**, including localhost. Because of that:
-
-- domain/timer tests were executed normally;
-- the full four-state UI was executed with Playwright using `page.set_content()` and a test-only in-memory persistence adapter;
-- mobile/desktop screenshots were generated and visually reviewed;
-- a real localhost IndexedDB/service-worker Playwright spec is included for CI/local execution, but could not be executed in this sandbox policy environment.
-
-See `docs/PASS1_5_IMPLEMENTATION_REPORT.md` for the current visual/verification matrix (and `docs/PASS1_IMPLEMENTATION_REPORT.md` for the original Pass-1 record).
-
-## Branding
-
-The application is an **unofficial student-made study tool**. Its app identity is original. The first scene is UPLB-inspired rather than using a modified UP seal or treating the Oblation as an app logo.
+See `AUDIT_AND_FIXES.md` for the detailed audit and handoff notes. A manually rendered layout reference is included at `docs/visual-preview.png`.

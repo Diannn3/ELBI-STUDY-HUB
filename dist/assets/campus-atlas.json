@@ -1,0 +1,215 @@
+{
+  "textures": [
+    {
+      "image": "campus-atlas.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 512,
+        "h": 190
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "bench_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 24,
+            "h": 20
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 7,
+            "w": 16,
+            "h": 11
+          },
+          "frame": {
+            "x": 4,
+            "y": 4,
+            "w": 16,
+            "h": 11
+          }
+        },
+        {
+          "filename": "bush_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 10
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 14,
+            "h": 9
+          },
+          "frame": {
+            "x": 24,
+            "y": 4,
+            "w": 14,
+            "h": 9
+          }
+        },
+        {
+          "filename": "campus_hero",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 320,
+            "h": 180
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 320,
+            "h": 180
+          },
+          "frame": {
+            "x": 42,
+            "y": 4,
+            "w": 320,
+            "h": 180
+          }
+        },
+        {
+          "filename": "grass_cluster_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 12,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 10,
+            "h": 7
+          },
+          "frame": {
+            "x": 366,
+            "y": 4,
+            "w": 10,
+            "h": 7
+          }
+        },
+        {
+          "filename": "lamp_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 18,
+            "h": 24
+          },
+          "spriteSourceSize": {
+            "x": 6,
+            "y": 4,
+            "w": 6,
+            "h": 17
+          },
+          "frame": {
+            "x": 380,
+            "y": 4,
+            "w": 6,
+            "h": 17
+          }
+        },
+        {
+          "filename": "radio_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 14,
+            "h": 11
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 2,
+            "w": 12,
+            "h": 9
+          },
+          "frame": {
+            "x": 390,
+            "y": 4,
+            "w": 12,
+            "h": 9
+          }
+        },
+        {
+          "filename": "student_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 20
+          },
+          "spriteSourceSize": {
+            "x": 6,
+            "y": 3,
+            "w": 6,
+            "h": 15
+          },
+          "frame": {
+            "x": 406,
+            "y": 4,
+            "w": 6,
+            "h": 15
+          }
+        },
+        {
+          "filename": "tree_acacia_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 60
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 21,
+            "w": 43,
+            "h": 36
+          },
+          "frame": {
+            "x": 416,
+            "y": 4,
+            "w": 43,
+            "h": 36
+          }
+        },
+        {
+          "filename": "tree_acacia_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 60
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 21,
+            "w": 43,
+            "h": 36
+          },
+          "frame": {
+            "x": 463,
+            "y": 4,
+            "w": 43,
+            "h": 36
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "FastPack-compatible fallback",
+    "version": "pass1",
+    "image": "campus-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 512,
+      "h": 190
+    },
+    "scale": 1
+  }
+}

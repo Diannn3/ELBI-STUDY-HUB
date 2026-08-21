@@ -1,3 +1,0 @@
--- Pass 1 intentionally does not create fake auth users.
--- Personal demo content is seeded in Dexie so the offline-first app can start without cloud credentials.
--- Once a Supabase user signs in, queued local mutations are rewritten with auth.uid() during replay.
