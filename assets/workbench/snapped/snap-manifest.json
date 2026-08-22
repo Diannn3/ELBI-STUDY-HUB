@@ -1,0 +1,16 @@
+{
+  "tool": "spritefusion-pixel-snapper",
+  "strict": false,
+  "records": [
+    {
+      "backend": "development-fallback",
+      "pixelSize": 2,
+      "outputWidth": 768,
+      "outputHeight": 480,
+      "source": "assets/inbox/generated/campus/campus_day_concept.png",
+      "output": "assets/workbench/snapped/campus/campus_day_concept.png",
+      "category": "campus",
+      "sha256": "5f4c13dee54ceeb7be57839d8db53d830ef312ca8d333d721ca0fcc61b86d052"
+    }
+  ]
+}

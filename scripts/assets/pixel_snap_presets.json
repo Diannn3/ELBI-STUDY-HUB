@@ -1,0 +1,25 @@
+{
+  "campus": {
+    "pixelSize": 2,
+    "colors": 44,
+    "expectedWidth": 768,
+    "expectedHeight": 480,
+    "inputScale": 2
+  },
+  "cloud": {
+    "pixelSize": 2,
+    "colors": 24
+  },
+  "foliage": {
+    "pixelSize": 2,
+    "colors": 32
+  },
+  "prop": {
+    "pixelSize": 4,
+    "colors": 24
+  },
+  "icon": {
+    "pixelSize": 4,
+    "colors": 16
+  }
+}

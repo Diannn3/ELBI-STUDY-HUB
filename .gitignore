@@ -10,4 +10,4 @@ assets/generated/atlases/*.tmp
 __pycache__/
 *.pyc
 
-.vercel
+.tmp-domain/

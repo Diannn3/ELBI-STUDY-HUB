@@ -1,0 +1,803 @@
+{
+  "textures": [
+    {
+      "image": "campus-atlas.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 512,
+        "h": 362
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "bench_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 24,
+            "h": 20
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 7,
+            "w": 16,
+            "h": 11
+          },
+          "frame": {
+            "x": 4,
+            "y": 4,
+            "w": 16,
+            "h": 11
+          }
+        },
+        {
+          "filename": "bush_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 10
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 14,
+            "h": 9
+          },
+          "frame": {
+            "x": 24,
+            "y": 4,
+            "w": 14,
+            "h": 9
+          }
+        },
+        {
+          "filename": "campus_hero",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 320,
+            "h": 180
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 320,
+            "h": 180
+          },
+          "frame": {
+            "x": 42,
+            "y": 4,
+            "w": 320,
+            "h": 180
+          }
+        },
+        {
+          "filename": "grass_cluster_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 12,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 10,
+            "h": 7
+          },
+          "frame": {
+            "x": 366,
+            "y": 4,
+            "w": 10,
+            "h": 7
+          }
+        },
+        {
+          "filename": "lamp_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 18,
+            "h": 24
+          },
+          "spriteSourceSize": {
+            "x": 6,
+            "y": 4,
+            "w": 6,
+            "h": 17
+          },
+          "frame": {
+            "x": 380,
+            "y": 4,
+            "w": 6,
+            "h": 17
+          }
+        },
+        {
+          "filename": "radio_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 14,
+            "h": 11
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 2,
+            "w": 12,
+            "h": 9
+          },
+          "frame": {
+            "x": 390,
+            "y": 4,
+            "w": 12,
+            "h": 9
+          }
+        },
+        {
+          "filename": "student_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 20
+          },
+          "spriteSourceSize": {
+            "x": 6,
+            "y": 3,
+            "w": 6,
+            "h": 15
+          },
+          "frame": {
+            "x": 406,
+            "y": 4,
+            "w": 6,
+            "h": 15
+          }
+        },
+        {
+          "filename": "tree_acacia_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 60
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 21,
+            "w": 43,
+            "h": 36
+          },
+          "frame": {
+            "x": 416,
+            "y": 4,
+            "w": 43,
+            "h": 36
+          }
+        },
+        {
+          "filename": "tree_acacia_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 60
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 21,
+            "w": 43,
+            "h": 36
+          },
+          "frame": {
+            "x": 463,
+            "y": 4,
+            "w": 43,
+            "h": 36
+          }
+        },
+        {
+          "filename": "bird_00",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 2,
+            "w": 14,
+            "h": 3
+          },
+          "frame": {
+            "x": 4,
+            "y": 188,
+            "w": 14,
+            "h": 3
+          }
+        },
+        {
+          "filename": "bird_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 4,
+            "w": 14,
+            "h": 1
+          },
+          "frame": {
+            "x": 22,
+            "y": 188,
+            "w": 14,
+            "h": 1
+          }
+        },
+        {
+          "filename": "bird_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 4,
+            "w": 14,
+            "h": 3
+          },
+          "frame": {
+            "x": 40,
+            "y": 188,
+            "w": 14,
+            "h": 3
+          }
+        },
+        {
+          "filename": "cloud_far_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 72,
+            "h": 26
+          },
+          "spriteSourceSize": {
+            "x": 5,
+            "y": 0,
+            "w": 63,
+            "h": 20
+          },
+          "frame": {
+            "x": 58,
+            "y": 188,
+            "w": 63,
+            "h": 20
+          }
+        },
+        {
+          "filename": "cloud_far_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 82,
+            "h": 29
+          },
+          "spriteSourceSize": {
+            "x": 6,
+            "y": 0,
+            "w": 72,
+            "h": 22
+          },
+          "frame": {
+            "x": 125,
+            "y": 188,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "filename": "cloud_far_03",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 92,
+            "h": 32
+          },
+          "spriteSourceSize": {
+            "x": 7,
+            "y": 0,
+            "w": 80,
+            "h": 24
+          },
+          "frame": {
+            "x": 201,
+            "y": 188,
+            "w": 80,
+            "h": 24
+          }
+        },
+        {
+          "filename": "cloud_mid_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 108,
+            "h": 38
+          },
+          "spriteSourceSize": {
+            "x": 9,
+            "y": 0,
+            "w": 93,
+            "h": 29
+          },
+          "frame": {
+            "x": 285,
+            "y": 188,
+            "w": 93,
+            "h": 29
+          }
+        },
+        {
+          "filename": "cloud_mid_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 120,
+            "h": 42
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 0,
+            "w": 111,
+            "h": 33
+          },
+          "frame": {
+            "x": 382,
+            "y": 188,
+            "w": 111,
+            "h": 33
+          }
+        },
+        {
+          "filename": "cloud_mid_03",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 132,
+            "h": 46
+          },
+          "spriteSourceSize": {
+            "x": 11,
+            "y": 0,
+            "w": 113,
+            "h": 34
+          },
+          "frame": {
+            "x": 4,
+            "y": 225,
+            "w": 113,
+            "h": 34
+          }
+        },
+        {
+          "filename": "cloud_mid_04",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 144,
+            "h": 50
+          },
+          "spriteSourceSize": {
+            "x": 10,
+            "y": 0,
+            "w": 125,
+            "h": 38
+          },
+          "frame": {
+            "x": 121,
+            "y": 225,
+            "w": 125,
+            "h": 38
+          }
+        },
+        {
+          "filename": "cloud_near_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 158,
+            "h": 54
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 0,
+            "w": 147,
+            "h": 42
+          },
+          "frame": {
+            "x": 250,
+            "y": 225,
+            "w": 147,
+            "h": 42
+          }
+        },
+        {
+          "filename": "cloud_near_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 176,
+            "h": 59
+          },
+          "spriteSourceSize": {
+            "x": 14,
+            "y": 0,
+            "w": 151,
+            "h": 45
+          },
+          "frame": {
+            "x": 4,
+            "y": 271,
+            "w": 151,
+            "h": 45
+          }
+        },
+        {
+          "filename": "grass_wind_00",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 24,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 2,
+            "w": 21,
+            "h": 6
+          },
+          "frame": {
+            "x": 159,
+            "y": 271,
+            "w": 21,
+            "h": 6
+          }
+        },
+        {
+          "filename": "grass_wind_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 24,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 2,
+            "w": 22,
+            "h": 6
+          },
+          "frame": {
+            "x": 184,
+            "y": 271,
+            "w": 22,
+            "h": 6
+          }
+        },
+        {
+          "filename": "grass_wind_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 24,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 2,
+            "w": 22,
+            "h": 6
+          },
+          "frame": {
+            "x": 210,
+            "y": 271,
+            "w": 22,
+            "h": 6
+          }
+        },
+        {
+          "filename": "leaf_00",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 5,
+            "h": 5
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 3,
+            "h": 3
+          },
+          "frame": {
+            "x": 236,
+            "y": 271,
+            "w": 3,
+            "h": 3
+          }
+        },
+        {
+          "filename": "leaf_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 5,
+            "h": 5
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 3,
+            "h": 3
+          },
+          "frame": {
+            "x": 243,
+            "y": 271,
+            "w": 3,
+            "h": 3
+          }
+        },
+        {
+          "filename": "leaf_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 5,
+            "h": 5
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 1,
+            "w": 3,
+            "h": 3
+          },
+          "frame": {
+            "x": 250,
+            "y": 271,
+            "w": 3,
+            "h": 3
+          }
+        },
+        {
+          "filename": "palm_fronds_00",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 64
+          },
+          "spriteSourceSize": {
+            "x": 5,
+            "y": 5,
+            "w": 39,
+            "h": 59
+          },
+          "frame": {
+            "x": 257,
+            "y": 271,
+            "w": 39,
+            "h": 59
+          }
+        },
+        {
+          "filename": "palm_fronds_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 64
+          },
+          "spriteSourceSize": {
+            "x": 4,
+            "y": 5,
+            "w": 41,
+            "h": 59
+          },
+          "frame": {
+            "x": 300,
+            "y": 271,
+            "w": 41,
+            "h": 59
+          }
+        },
+        {
+          "filename": "palm_fronds_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 64
+          },
+          "spriteSourceSize": {
+            "x": 2,
+            "y": 5,
+            "w": 45,
+            "h": 59
+          },
+          "frame": {
+            "x": 345,
+            "y": 271,
+            "w": 45,
+            "h": 59
+          }
+        },
+        {
+          "filename": "palm_fronds_03",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 48,
+            "h": 64
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 5,
+            "w": 47,
+            "h": 59
+          },
+          "frame": {
+            "x": 394,
+            "y": 271,
+            "w": 47,
+            "h": 59
+          }
+        },
+        {
+          "filename": "rain_streak",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 2,
+            "h": 7
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 2,
+            "h": 7
+          },
+          "frame": {
+            "x": 445,
+            "y": 271,
+            "w": 2,
+            "h": 7
+          }
+        },
+        {
+          "filename": "tree_canopy_00",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 64,
+            "h": 42
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 5,
+            "w": 64,
+            "h": 22
+          },
+          "frame": {
+            "x": 4,
+            "y": 334,
+            "w": 64,
+            "h": 22
+          }
+        },
+        {
+          "filename": "tree_canopy_01",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 64,
+            "h": 42
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 5,
+            "w": 63,
+            "h": 22
+          },
+          "frame": {
+            "x": 72,
+            "y": 334,
+            "w": 63,
+            "h": 22
+          }
+        },
+        {
+          "filename": "tree_canopy_03",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 64,
+            "h": 42
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 5,
+            "w": 63,
+            "h": 22
+          },
+          "frame": {
+            "x": 139,
+            "y": 334,
+            "w": 63,
+            "h": 22
+          }
+        },
+        {
+          "filename": "bird_03",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 16,
+            "h": 8
+          },
+          "spriteSourceSize": {
+            "x": 1,
+            "y": 4,
+            "w": 14,
+            "h": 1
+          },
+          "frame": {
+            "x": 22,
+            "y": 188,
+            "w": 14,
+            "h": 1
+          }
+        },
+        {
+          "filename": "tree_canopy_02",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": {
+            "w": 64,
+            "h": 42
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 5,
+            "w": 64,
+            "h": 22
+          },
+          "frame": {
+            "x": 4,
+            "y": 334,
+            "w": 64,
+            "h": 22
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "FastPack-compatible fallback",
+    "version": "pass1",
+    "image": "campus-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 512,
+      "h": 362
+    },
+    "scale": 1
+  }
+}

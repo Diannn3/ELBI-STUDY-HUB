@@ -1,0 +1,18 @@
+{
+  "screenshots": [
+    "test-artifacts/living-home-1536.png",
+    "test-artifacts/living-home-1366.png",
+    "test-artifacts/living-home-dark.png",
+    "test-artifacts/living-home-mobile.png"
+  ],
+  "checks": {
+    "living-home-1536 board visible": true,
+    "living-home-1536 scene visible": true,
+    "living-home-1366 board visible": true,
+    "living-home-1366 scene visible": true,
+    "living-home-dark board visible": true,
+    "living-home-dark scene visible": true,
+    "living-home-mobile board visible": true,
+    "living-home-mobile scene visible": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "sceneSize": [
+    768,
+    480
+  ],
+  "sceneMap": "scene_living.json",
+  "plates": [
+    "01_sky_base.png",
+    "05_haze.png",
+    "07_world_static.png",
+    "21_sun_dapple_1.png",
+    "21_sun_dapple_2.png",
+    "22_cloud_shadow.png"
+  ],
+  "spriteCount": 28
+}
